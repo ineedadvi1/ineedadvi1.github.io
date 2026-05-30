@@ -274,6 +274,12 @@
   </div>
 
   <script>
+    // Push a state so the back button hits this instead of leaving
+    history.pushState(null, '', location.href);
+    window.addEventListener('popstate', () => {
+      history.pushState(null, '', location.href);
+    });
+
     const PASSWORD = '9999';
     let entry = '';
 
