@@ -1,0 +1,240 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --white: #ffffff;
+  --off-white: rgba(255,255,255,0.85);
+  --dim: rgba(255,255,255,0.4);
+  --border: rgba(255,255,255,0.75);
+  --radius: 20px;
+  --radius-sm: 14px;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  color: #fff;
+  font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+  overflow: hidden;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ── LOCK SCREEN ── */
+#lock-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: fadeIn 0.3s ease;
+}
+
+#lock-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 280px;
+}
+
+#lock-icon {
+  width: 48px;
+  height: 48px;
+  opacity: 0.7;
+}
+
+#lock-label {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--off-white);
+  letter-spacing: 0.02em;
+}
+
+#dots {
+  display: flex;
+  gap: 18px;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  transition: background 0.15s ease;
+}
+
+.dot.filled {
+  background: var(--white);
+}
+
+#numpad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+
+.num {
+  background: transparent;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--white);
+  font-size: 22px;
+  font-weight: 300;
+  height: 64px;
+  cursor: pointer;
+  transition: background 0.12s ease, transform 0.08s ease;
+  font-family: inherit;
+}
+
+.num:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.num:active {
+  background: rgba(255,255,255,0.18);
+  transform: scale(0.95);
+}
+
+#clear-btn {
+  font-size: 18px;
+}
+
+#wrong-msg {
+  font-size: 13px;
+  color: rgba(255,80,80,0.9);
+  height: 18px;
+  letter-spacing: 0.03em;
+}
+
+/* ── SHAKE ANIMATION ── */
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-8px); }
+  80% { transform: translateX(8px); }
+}
+
+.shake {
+  animation: shake 0.4s ease;
+}
+
+/* ── MAIN APP ── */
+#app {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  background: #000;
+  animation: fadeIn 0.4s ease;
+}
+
+#app-title {
+  font-size: 15px;
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: repeat(4, 120px);
+  gap: 28px;
+}
+
+.app-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--off-white);
+  cursor: pointer;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.app-btn:hover {
+  transform: scale(1.08);
+  opacity: 1;
+}
+
+.app-btn:active {
+  transform: scale(0.97);
+}
+
+.icon-wrap {
+  width: 90px;
+  height: 90px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.app-btn:hover .icon-wrap {
+  background: rgba(255,255,255,0.06);
+  border-color: var(--white);
+}
+
+.icon-wrap svg {
+  width: 40px;
+  height: 40px;
+}
+
+.app-btn span {
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--dim);
+  transition: color 0.18s ease;
+}
+
+.app-btn:hover span {
+  color: var(--off-white);
+}
+
+#hint {
+  font-size: 12px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.05em;
+}
+
+#hint kbd {
+  font-family: inherit;
+  font-size: 11px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 5px;
+  padding: 1px 5px;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ── FADE IN ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 560px) {
+  #grid {
+    grid-template-columns: repeat(2, 110px);
+    gap: 24px;
+  }
+}
